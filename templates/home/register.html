@@ -1,0 +1,78 @@
+{% extends './layout.html' %}
+{% load static %}
+{% block content %}
+
+		<div class="row ">
+          <form class="col s6 offset-s3 card-panel amber lighten-3 " action="" method="POST">
+          	{% csrf_token %}
+            <div class="row">
+              <div class="col s4 offset-s4" style="text-align: center;">
+                <h4>Register</h4>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="input-field col s6">
+                <input name="first_name" id="first_name" type="text" class="validate" required="">
+                <label for="first_name">First Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input name="last_name" id="last_name" type="text" class="validate" required="">
+                <label for="last_name">Last Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input name="user_name" id="user_name" type="text" class="validate" required="">
+                <label for="user_name">User Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="password" name="password" type="password" class="validate" required="">
+                <label for="password">Password</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="passwordConfirm" type="password" oninput="validator()" required="">
+                <label id="lblPasswordConfirm" for="passwordConfirm">Password (Confirm)</label>
+                <span id="help-text" class="helper-text" ></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <input name="date" id="date" type="date" class="validate" required="">
+                <label for="date">DOB</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input name="email" id="email" type="email" class="validate" required="">
+                <label for="email">Email</label>
+                <span class="helper-text" data-error="Invalid" data-success="Valid"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                  <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                  </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      <script type="text/javascript" src={% static 'js/materialize.min.js' %}></script>
+      <script >
+        function validator() {
+          var p1 = document.getElementById('password').value;
+          var p2 = document.getElementById('passwordConfirm').value;
+          
+          if(p1!=p2){
+            document.getElementById('help-text').innerHTML='Passwords Do Not Match';
+          }
+          else{
+            document.getElementById('help-text').innerHTML='Passwords Match';
+          }
+        }
+     
+      </script>
+
+{% endblock %}

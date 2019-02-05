@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href={% static "css/materialize.min.css" %} media="screen,projection"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+	<nav class="nav-extended purple lighten-2">
+      <div class="nav-wrapper db">
+        <ul class="bt right">
+          <li class="k"><a href="/logout">Logout</a></li>
+         </ul>
+      </div>
+      <div class="nav-header de">
+      	<h2 class="center-align">Chef's Book</h2>
+        <div class="ge center-align">Recipes for all..</div>
+      </div>
+      <div class="nav-wrapper purple lighten-1">
+        <div class="container" style="top: 0px;">
+          <ul class="bt ">
+            <li class="k"><a href="/user">Home</a></li>
+            <li class="k"><a href="/my_recipes">My Recipes</a></li>
+            <li class="k"><a href="/add_recipe">Add New Recipe</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% block content%}
+    {% endblock %}
+    {% if Recipes %}
+        <div class="row">
+        {% for recipe in Recipes %}
+            <div class="col s4">
+              <div class="card blue-grey darken-1 white-text">
+                <div class="card-image">
+                  <img src="/media/uploads/{{recipe.image_name}}" width="400px" height="400px">
+                </div>
+                <div class="card-content">
+                  <span class="card-title">{{recipe.recipe_name}}</span>
+                  <p class="left-align">By : {{recipe.author_name}}</p>
+                  <p class="left-align">Date : {{recipe.created_date}}</p>
+                </div>
+                <div class="card-action">
+                  <a href="{% url 'Show_recipe' value=recipe.recipe_name %}">View Recipe</a>
+                  <a href="{% url 'Delete' value=recipe.recipe_name %}">Delete</a>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+</body>
+</html>
